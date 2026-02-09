@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopiverse | Welcome</title>
+    <link rel="stylesheet" href="src/styles.css">
+    <link rel="shortcut icon" href="public/images/Shopiverse favicon.png" type="image/x-icon">
+    <style>
+        .page-content {
+            box-sizing: border-box;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--base-color); 
+        }
+        h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--text-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="page-content">
+        <h1>Welcome to Shopiverse!</h1>
+        <p>You have successfully logged in.</p>
+        <p>Redirecting you to the main page...</p>
+    </div>
+
+    <script>
+        // Check URL parameters for successful login
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        if (urlParams.get('status') === 'logged_in') {
+            // 1. Show success toast (using alert() as a simple replacement)
+            // alert('You logged in successfully!');
+            
+            // 2. Set the delay for redirection (3000 milliseconds = 3 seconds)
+            const REDIRECT_DELAY = 4000;
+            
+            // 3. Set a timeout to redirect to the actual home page
+            setTimeout(() => {
+                // IMPORTANT: Change 'homepage.html' to the actual URL of your website's home page.
+                window.location.href = 'index.html'; 
+            }, REDIRECT_DELAY);
+
+            // 4. Clear the URL parameter after showing the message (optional, but good practice)
+            history.replaceState({}, document.title, window.location.pathname);
+        } else {
+             // If not coming from a successful login, just redirect immediately or show a generic page.
+             // For safety, you might want to redirect users who land here without the status parameter.
+             window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>
